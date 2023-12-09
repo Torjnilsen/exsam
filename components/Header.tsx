@@ -1,4 +1,3 @@
-// Header.tsx
 import React from 'react';
 import Container from './ui/container';
 import Link from 'next/link';
@@ -28,27 +27,15 @@ const Header: React.FC<HeaderProps> = ({ registeredUser }) => {
                 <Menu className="h-6 md:hidden w-6" />
               </SheetTrigger>
               <SheetContent side="left" className='w-[300px] sm:w-[400px] flex flex-col'>
-                {registeredUser ? (
-                  <>
-                    <p className='text-sm font-medium'>{registeredUser.name}</p>
-                    <p className='text-sm font-medium'>{registeredUser.email}</p>
-                    <p className='text-sm font-medium'>{registeredUser.credits} credits</p>
-                  </>
+                {typeof registeredUser === 'string' ? (
+              
+                  <p className='text-sm font-medium'>{registeredUser}</p>
                 ) : (
-                  <>
-                    <Link href="/login" className='text-sm font-medium transition-colors'>
-                      Login
-                    </Link>
                 
-                    <Link href="/profilepage" className='text-sm font-medium transition-colors'>
-                      Profiles
-                    </Link>
-                    <Link href="/" className='text-sm font-medium transition-colors'>
-                      Listings
-                    </Link>
-                    <Link href="/newistings" className='text-sm font-medium transition-colors'>
-                      New Listing
-                    </Link>
+                  <>
+                    <p className='text-sm font-medium'>{registeredUser?.name}</p>
+                    <p className='text-sm font-medium'>{registeredUser?.email}</p>
+                    <p className='text-sm font-medium'>{registeredUser?.credits} credits</p>
                   </>
                 )}
               </SheetContent>
@@ -80,12 +67,10 @@ const Header: React.FC<HeaderProps> = ({ registeredUser }) => {
             </Button>
             <Button variant="ghost">
               <Link href="/register" className='text-sm font-medium transition-colors'>
-                register
+                Register
               </Link>
             </Button>
-            
           </nav>
-         
         </div>
       </Container>
     </header>
