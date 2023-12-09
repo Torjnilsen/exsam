@@ -88,7 +88,8 @@ export default function ExampleProfiles() {
 
   return (
     <>
-      <Header registeredUser={{ name: 'John Doe', email: 'john@example.com', avatar: 'url-to-avatar' }} />
+     <Header registeredUser={{ id: 1, name: 'John Doe', email: 'john@example.com', avatar: 'url-to-avatar', credits: 100 }} />
+
 
 
       <section id="feed" className="w-full bg-base-100">
