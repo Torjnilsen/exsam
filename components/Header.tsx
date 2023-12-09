@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { Button } from './ui/button';
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
-import LogoutPage from '@/app/logout/page';
 
 interface HeaderProps {
   registeredUser: {

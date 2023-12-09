@@ -28,6 +28,8 @@ const Home: React.FC = () => {
   const [bidMessage, setBidMessage] = useState<{ [key: string]: string | null }>({});
   const [highestBidderUsername, setHighestBidderUsername] = useState<string | null>(null);
   const [highestBidderSellerName, setHighestBidderSellerName] = useState<string | null>(null);
+    const [token, setToken] = useState<string | null>(null);
+  
 
   const handleLogout = () => {
     localStorage.removeItem('registeredUser');
@@ -92,6 +94,7 @@ const Home: React.FC = () => {
       const storedUser = localStorage.getItem('registeredUser') || Cookies.get('registeredUser');
       if (storedUser) {
         const userData = JSON.parse(storedUser);
+        setToken(userData.token); // Set the token in the state
         setUserDetails({
           id: userData.id,
           name: userData.name,
@@ -156,10 +159,11 @@ const Home: React.FC = () => {
           amount: bidAmounts[listingId] || 0,
         }),
       });
-
+    
       if (!response.ok) {
-        throw new Error('Failed to place bid')
+        throw new Error('Failed to place bid');
       }
+      
 
       const data = await response.json();
 
@@ -213,8 +217,8 @@ const Home: React.FC = () => {
 
 
   return (
-    <main  key={isLoggedIn ? 'loggedIn' : 'loggedOut'} className="">
-      <Header />
+    <main key={isLoggedIn ? 'loggedIn' : 'loggedOut'} className="">
+      <Header registeredUser={token} />
       <div className="w-full p-6">
         <div className='p-6 '>
           <div className="flex flex-col items-center bg-white p-4 rounded-md shadow-md space-y-4 relative">
