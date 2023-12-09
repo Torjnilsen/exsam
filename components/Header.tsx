@@ -27,17 +27,29 @@ const Header: React.FC<HeaderProps> = ({ registeredUser }) => {
                 <Menu className="h-6 md:hidden w-6" />
               </SheetTrigger>
               <SheetContent side="left" className='w-[300px] sm:w-[400px] flex flex-col'>
-                {typeof registeredUser === 'string' ? (
-              
-                  <p className='text-sm font-medium'>{registeredUser}</p>
-                ) : (
+                
                 
                   <>
-                    <p className='text-sm font-medium'>{registeredUser?.name}</p>
-                    <p className='text-sm font-medium'>{registeredUser?.email}</p>
-                    <p className='text-sm font-medium'>{registeredUser?.credits} credits</p>
+                  <Link href="profilepage">
+                    profiles
+                  </Link>
+                  <Link href="/">
+                    listings
+                  </Link>
+                  <Link href="newistings">
+                    new listing
+                  </Link>
+                  <Link href="login">
+                    login
+                  </Link>
+                  <Link href="register">
+                    register
+                  </Link>
+                  
+                  
+                  
                   </>
-                )}
+                
               </SheetContent>
             </Sheet>
             <Link href="/" className=' ml-4 lg:ml-0'>
