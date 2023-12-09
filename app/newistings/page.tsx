@@ -105,7 +105,12 @@ const CreateListing: React.FC = () => {
         setError(`Error creating listing: ${errorMessage}`);
       }
     } catch (error) {
-      setError(`Error creating listing: ${error.message}`);
+      if (error instanceof Error) {
+        setError(`Error creating listing: ${error.message}`);
+      } else {
+        // Handle other cases if needed
+        setError(`An unknown error occurred`);
+      }
     } finally {
       setLoading(false);
     }
