@@ -108,7 +108,7 @@ const Home: React.FC = () => {
 
       const data = await response.json();
       setAuctionListings(data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching auction listings:', error.message);
     }
   };
@@ -180,9 +180,7 @@ const Home: React.FC = () => {
       setListingBids(data);
       setSelectedListing(listingId);
   
-      const highestBidder = findHighestBidder(data);
-      setHighestBidderUsername(highestBidder?.bidderName || null);
-      setHighestBidderSellerName(highestBidder?.sellerName || null);
+      
     } catch (error) {
       console.error('Error fetching bids:', error.message);
     }
