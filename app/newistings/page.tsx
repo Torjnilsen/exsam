@@ -118,7 +118,7 @@ const CreateListing: React.FC = () => {
 
   return (
     <main className="">
-      <Header />
+       <Header registeredUser={accessToken} />
       <div className="w-full px-6">
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <h3 className='flex justify-center items-center p-6 font-bold'>New listing</h3>
