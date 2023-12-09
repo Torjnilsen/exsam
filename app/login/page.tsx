@@ -1,5 +1,4 @@
 "use client"
-// Login.tsx
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
@@ -58,18 +57,16 @@ const Login: React.FC = () => {
 
       Cookies.set('authToken', data.accessToken, { expires: 7, path: '/' });
 
-      // Store user details in localStorage
       localStorage.setItem('registeredUser', JSON.stringify({
         id: data.id,
         name: data.name,
         email: data.email,
-        avatar: data.avatar, // Include other relevant fields
+        avatar: data.avatar, 
         credits: data.credits,
       }));
 
       console.log('User logged in successfully', data);
 
-      // Use the useRouter hook to navigate to the home page
       router.push('/');
 
     } catch (error: any) {

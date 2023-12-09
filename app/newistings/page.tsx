@@ -37,7 +37,6 @@ const CreateListing: React.FC = () => {
       console.error("Access token not found. Please make sure you are logged in.");
     }
 
-    // Retrieve created listings from local storage
     const storedListings = localStorage.getItem('createdListings');
     if (storedListings) {
       setCreatedListings(JSON.parse(storedListings));
@@ -98,7 +97,6 @@ const CreateListing: React.FC = () => {
         setSuccessMessage('Listing created successfully!');
         console.log('listing created successfully', responseData);
 
-        // Store updated listings in local storage
         localStorage.setItem('createdListings', JSON.stringify([...createdListings, responseData]));
       } else {
         const errorMessage = await response.text();
@@ -108,7 +106,7 @@ const CreateListing: React.FC = () => {
       if (error instanceof Error) {
         setError(`Error creating listing: ${error.message}`);
       } else {
-        // Handle other cases if needed
+  
         setError(`An unknown error occurred`);
       }
     } finally {

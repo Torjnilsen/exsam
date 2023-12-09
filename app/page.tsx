@@ -44,19 +44,7 @@ const Home: React.FC = () => {
     });
     setIsLoggedIn(false);
   };
-  const findHighestBidder = (bids) => {
-    if (!bids || bids.length === 0) {
-      return null;
-    }
-
-    const highestBid = bids.reduce((prev, current) => (current.amount > prev.amount ? current : prev));
-    const highestBidder = {
-      bidderName: highestBid.bidderName,
-      sellerName: highestBid.seller?.name || 'N/A',
-    };
-
-    return highestBidder;
-  };
+  
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -94,7 +82,7 @@ const Home: React.FC = () => {
       const storedUser = localStorage.getItem('registeredUser') || Cookies.get('registeredUser');
       if (storedUser) {
         const userData = JSON.parse(storedUser);
-        setToken(userData.token); // Set the token in the state
+        setToken(userData.token); 
         setUserDetails({
           id: userData.id,
           name: userData.name,
@@ -192,7 +180,6 @@ const Home: React.FC = () => {
       setListingBids(data);
       setSelectedListing(listingId);
   
-      // Call findHighestBidder and set the state
       const highestBidder = findHighestBidder(data);
       setHighestBidderUsername(highestBidder?.bidderName || null);
       setHighestBidderSellerName(highestBidder?.sellerName || null);
@@ -340,7 +327,6 @@ const Home: React.FC = () => {
                     Bid
                   </Button>
                 ) : (
-                  // Show the button only when the user is logged out
                   <div className="bg-gray-300 text-gray-600 py-2 px-4 rounded-md cursor-not-allowed">
                     Log in to Bid
                   </div>

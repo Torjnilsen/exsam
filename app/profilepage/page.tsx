@@ -36,7 +36,7 @@ export default function ExampleProfiles() {
 
         const data: Profile[] = await response.json();
 
-        // Generate and set random avatar images for profiles
+       
         const updatedProfiles = data.map((profile) => ({
           ...profile,
           avatar: getRandomAvatarImage(profile.name),
@@ -73,7 +73,7 @@ export default function ExampleProfiles() {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
     setVisibleProfiles(10);
-    setHasMore(true); // Reset hasMore when performing a new search
+    setHasMore(true); 
   };
 
   const filteredProfiles = profiles.filter((profile) =>
@@ -179,4 +179,3 @@ export default function ExampleProfiles() {
     </>
   );
 }
-const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODEsIm5hbWUiOiJmcm9kbG8iLCJlbWFpbCI6ImZpcnN0Lmxhc3RAc3R1ZC5ub3JvZmYubm8iLCJhdmF0YXIiOm51bGwsImJhbm5lciI6bnVsbCwiaWF0IjoxNjk2NDExMTMyfQ.5rZZV8ic8pB0zNR_fLzZyHmOgteJA4HE5AbB4iPvNNE"; // Replace with your actual access token
