@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 import { FaUpload } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
 const Home: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('registeredUser'));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [auctionListings, setAuctionListings] = useState([]);
   const [visibleListings, setVisibleListings] = useState(10);
@@ -79,26 +79,29 @@ const Home: React.FC = () => {
   
   const fetchData = async () => {
     try {
-      const storedUser = localStorage.getItem('registeredUser') || Cookies.get('registeredUser');
-      if (storedUser) {
-        const userData = JSON.parse(storedUser);
-        setToken(userData.token); 
-        setUserDetails({
-          id: userData.id,
-          name: userData.name,
-          email: userData.email,
-          avatar: userData.avatar,
-          credits: userData.credits,
-        });
-        setIsLoggedIn(true);
-      } else {
-        setUserDetails({
-          id: 0,
-          name: '',
-          email: '',
-          avatar: '',
-          credits: 1000,
-        });
+      // Check if window is defined (running on the client side)
+      if (typeof window !== 'undefined') {
+        const storedUser = localStorage.getItem('registeredUser') || Cookies.get('registeredUser');
+        if (storedUser) {
+          const userData = JSON.parse(storedUser);
+          setToken(userData.token);
+          setUserDetails({
+            id: userData.id,
+            name: userData.name,
+            email: userData.email,
+            avatar: userData.avatar,
+            credits: userData.credits,
+          });
+          setIsLoggedIn(true);
+        } else {
+          setUserDetails({
+            id: 0,
+            name: '',
+            email: '',
+            avatar: '',
+            credits: 1000,
+          });
+        }
       }
 
       const response = await fetch('https://api.noroff.dev/api/v1/auction/listings?_bids=true');
