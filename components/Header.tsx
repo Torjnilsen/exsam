@@ -14,7 +14,7 @@ interface HeaderProps {
     email: string;
     avatar: string;
     credits: number;
-  } | null;
+  } | null | string;
 }
 
 const Header: React.FC<HeaderProps> = ({ registeredUser }) => {
