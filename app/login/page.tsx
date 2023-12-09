@@ -72,10 +72,11 @@ const Login: React.FC = () => {
       // Use the useRouter hook to navigate to the home page
       router.push('/');
 
-    } catch (error) {
-      console.error('Error logging in', error.message);
-      setError('Error logging in. Please try again.')
+    } catch (error: any) {
+      console.error("Error logging in", error.message);
+      setError("Error logging in. Please try again.");
     }
+    
   };
 
   return (
