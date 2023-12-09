@@ -88,7 +88,8 @@ export default function ExampleProfiles() {
 
   return (
     <>
-      <Header />
+      <Header registeredUser={{ name: 'John Doe', email: 'john@example.com', avatar: 'url-to-avatar' }} />
+
 
       <section id="feed" className="w-full bg-base-100">
         <div className="text-center py-8">
