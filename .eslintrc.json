@@ -3,7 +3,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "react"],
   "rules": {
-    "react/no-unescaped-entities": ["error", { "forbid": [">", "}"] }],
+    "react/no-unescaped-entities": ["error", { "forbid": [">", "}"] }]
     // Add other ESLint rules as needed
   }
 }
