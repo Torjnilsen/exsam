@@ -117,23 +117,28 @@ const CreateListing: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+  
     try {
       if (!accessToken) {
         throw new Error("Access token not available. Please make sure you are logged in.");
       }
-
+  
       let mediaArray = Array.isArray(formData.media) ? formData.media : [formData.media];
-      const price = parseFloat(formData.price);
-      const maxGuests = parseInt(formData.maxGuests);
+      const price = typeof formData.price === 'string' ? parseFloat(formData.price) : 0;
+const maxGuests = typeof formData.maxGuests === 'string' ? parseInt(formData.maxGuests) : 0;
 
+  
       if (isNaN(price)) {
         throw new Error("Price must be a number");
       }
-
+  
       if (isNaN(maxGuests)) {
         throw new Error("Max guests must be a number");
       }
+  
+  
+      // Rest of the code remains unchanged
+  
 
       const requestUrl = formData.id
         ? `https://api.noroff.dev/api/v1/holidaze/venues/${formData.id}` // Update existing venue
