@@ -1,17 +1,10 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 interface RegisterProps {}
-
-interface RegisteredUser {
-  name: string;
-  email: string;
-  token: string;
-}
 
 const Register: React.FC<RegisterProps> = () => {
   const router = useRouter();
@@ -19,20 +12,11 @@ const Register: React.FC<RegisterProps> = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    avatar: '',
     password: '',
+    venueManager: true 
   });
 
-  const [registeredUser, setRegisteredUser] = useState<RegisteredUser | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem('registeredUser') || Cookies.get('registeredUser');
-
-    if (storedUser) {
-      setRegisteredUser(JSON.parse(storedUser));
-    }
-  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -42,18 +26,18 @@ const Register: React.FC<RegisterProps> = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
-    if (!formData.email.endsWith('@stud.noroff.no')) {
-      setError('Invalid email address. Please use an email ending with "@stud.noroff.no"');
-      return;
-    }
-  
     try {
-      const response = await fetch('https://api.noroff.dev/api/v1/auction/auth/register', {
+      const response = await fetch('https://api.noroff.dev/api/v1/holidaze/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          venueManager: formData.venueManager,
+        }),
       });
   
       const data = await response.json();
@@ -73,26 +57,6 @@ const Register: React.FC<RegisterProps> = () => {
   
       console.log('User registered successfully:', data);
   
-      const accessToken = data.token;
-  
-      setRegisteredUser({
-        name: data.name,
-        email: data.email,
-        token: accessToken,
-      });
-  
-      localStorage.setItem('registeredUser', JSON.stringify({
-        name: data.name,
-        email: data.email,
-        token: accessToken,
-      }));
-  
-      Cookies.set('registeredUser', JSON.stringify({
-        name: data.name,
-        email: data.email,
-        token: accessToken,
-      }));
-  
       router.push('/login');
     } catch (error) {
       console.error('Error registering user:', error.message);
@@ -100,12 +64,10 @@ const Register: React.FC<RegisterProps> = () => {
     }
   };
 
-  
-
   return (
-    <main className="flex items-center justify-center min-h-screen bg-[#427981]">
+    <main className="flex items-center justify-center min-h-screen" style={{ backgroundImage: "url('/PRIVATE-HOUSE-IN-OSLO.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
       <div className="w-full px-6 mt-8">
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 rounded-md shadow-md">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 rounded-md shadow-md">
           <h3 className="text-2xl font-bold mb-4 text-gray-800">Register</h3>
           <div className="mb-4">
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -148,28 +110,16 @@ const Register: React.FC<RegisterProps> = () => {
           </div>
           <Button type="submit">Register</Button>
 
-          {error && (
-            <p className='mb-4 text-red-500'>
-              {error}
-            </p>
-          )}
+          {error && <p className="mb-4 text-red-500">{error}</p>}
 
           <div>
             <p className="font-semibold">
-              already have an account?
+              Already have an account?
               <Link href="/login">
-                
-                <span className="text-[#58D096] underline">sign in</span>
+                <span className="text-[#FF585D] underline">Sign in</span>
               </Link>
             </p>
-            <p className="font-semibold">
-              Register today and get
-              <Link href="/login">
-                
-                <span className="text-[#58D096]">1000</span>
-              </Link>
-              credits for free
-            </p>
+           
           </div>
         </form>
       </div>
@@ -178,4 +128,3 @@ const Register: React.FC<RegisterProps> = () => {
 };
 
 export default Register;
-

@@ -12,7 +12,7 @@ interface HeaderProps {
     name: string;
     email: string;
     avatar: string;
-    credits: number;
+   
   } | null | string;
 }
 
@@ -34,10 +34,13 @@ const Header: React.FC<HeaderProps> = ({ registeredUser }) => {
                     profiles
                   </Link>
                   <Link href="/">
-                    listings
+                    Home
+                  </Link>
+                  <Link href="venues">
+                    Venues
                   </Link>
                   <Link href="newistings">
-                    new listing
+                    Create Venues
                   </Link>
                   <Link href="login">
                     login
@@ -53,13 +56,13 @@ const Header: React.FC<HeaderProps> = ({ registeredUser }) => {
               </SheetContent>
             </Sheet>
             <Link href="/" className=' ml-4 lg:ml-0'>
-              <Image src="/logo.jpeg" width={50} height={50} alt=' auction house logo' className='mx-6 rounded-2xl flex items-center space-x-4 lg:space-x-6 hidden md:block' />
+              <Image src="/Holidaze.png" width={130} height={130} alt=' auction house logo' className='mx-6 rounded-2xl flex items-center space-x-4 lg:space-x-6 hidden md:block' />
             </Link>
           </div>
           <nav className='mx-6 flex items-center space-x-4 lg:space-x-6 hidden md:block'>
             <Button variant="ghost">
               <Link href="/" className='text-sm font-medium transition-colors'>
-                Listings
+              Home
               </Link>
             </Button>
             <Button variant="ghost">
@@ -68,8 +71,13 @@ const Header: React.FC<HeaderProps> = ({ registeredUser }) => {
               </Link>
             </Button>
             <Button variant="ghost">
+              <Link href="/venues" className='text-sm font-medium transition-colors'>
+              Venues
+              </Link>
+            </Button>
+            <Button variant="ghost">
               <Link href="/newistings" className='text-sm font-medium transition-colors'>
-                New Listing
+              Create Venues
               </Link>
             </Button>
             <Button variant="ghost">
